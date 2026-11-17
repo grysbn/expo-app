@@ -1,12 +1,12 @@
 {
-  "name": "逛展手帳",
-  "short_name": "逛展手帳",
+  "name": "展覽小幫手",
+  "short_name": "展覽小幫手",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#F8E7CB",
-  "theme_color": "#F8E7CB",
+  "background_color": "#D5DFE6",
+  "theme_color": "#D5DFE6",
   "lang": "zh-Hant",
   "icons": [
     {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
