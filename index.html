@@ -389,9 +389,6 @@ h2,h3,.ecard .nm,.sheet .sh-h h2{font-family:'Playfair Display','Noto Serif TC',
 .ib-head:first-child{border-top:0;padding-top:4px}
 .ib-head+.item{border-top:0;padding-top:4px}
 
-/* 編號：No. 與數字同一行、同大小 */
-.code,.code.p1{flex-direction:row;min-width:68px;height:40px;padding:0 10px;border-radius:2px;font-size:20px;gap:1px;align-self:center}
-.code::before,.code.p3::before,.code.p2::before{content:"No.";font-family:'Playfair Display','Cormorant Garamond',serif;font-style:normal;font-size:20px;font-weight:inherit;letter-spacing:0;margin:0;opacity:1;color:inherit}
 /* 已逛／已買／完成：拿掉圓圈，改成細線勾勾，勾選後變酒紅 */
 .check,.check.on{width:44px;height:44px;border:0;border-radius:0;background:transparent;font-size:0;color:transparent}
 .check::after{content:"";width:20px;height:20px;display:block;margin:auto;background:#D9CDB8;
@@ -400,8 +397,14 @@ h2,h3,.ecard .nm,.sheet .sh-h h2{font-family:'Playfair Display','Noto Serif TC',
 .check.on::after{background:var(--accent);width:24px;height:24px}
 
 /* 數字字型：IM Fell English（18 世紀活版印刷風） */
-.code,.code::before,.code.p3::before,.code.p2::before,.ib-code,.price,.stat .n,.sum b,.pin,.zoomer span{font-family:'IM Fell English','Playfair Display',serif!important;font-weight:400!important;font-style:normal!important}
-.code{font-size:22px}.code::before{font-size:22px!important}
+.ib-code,.price,.stat .n,.sum b,.pin,.zoomer span{font-family:'IM Fell English','Playfair Display',serif!important;font-weight:400!important;font-style:normal!important}
+
+/* 集章格：圓形郵戳 */
+.stamps{gap:10px}
+.stamp{width:46px;height:46px;border-radius:50%;font-family:'IM Fell English','Playfair Display',serif;font-weight:400;font-size:17px}
+.stamp.lbl{width:auto;height:40px;border-radius:20px;font-family:'Noto Serif TC',serif;font-size:14px}
+.stamp.on{border-radius:50%}
+.stamp.lbl.on{border-radius:20px}
 </style>
 </head>
 <body>
