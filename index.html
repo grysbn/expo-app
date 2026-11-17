@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="展覽小幫手">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== 展覽小幫手・奶油日系風格 =====
    字型：中文標題 Noto Serif TC／內文 Noto Sans TC／英數 Cormorant Garamond
@@ -388,6 +388,20 @@ h2,h3,.ecard .nm,.sheet .sh-h h2{font-family:'Playfair Display','Noto Serif TC',
 .ib-head{display:flex;align-items:baseline;gap:8px;padding:18px 0 6px;font-size:14px;color:var(--sub);letter-spacing:.04em;border-top:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
 .ib-head:first-child{border-top:0;padding-top:4px}
 .ib-head+.item{border-top:0;padding-top:4px}
+
+/* 編號：No. 與數字同一行、同大小 */
+.code,.code.p1{flex-direction:row;min-width:68px;height:40px;padding:0 10px;border-radius:2px;font-size:20px;gap:1px;align-self:center}
+.code::before,.code.p3::before,.code.p2::before{content:"No.";font-family:'Playfair Display','Cormorant Garamond',serif;font-style:normal;font-size:20px;font-weight:inherit;letter-spacing:0;margin:0;opacity:1;color:inherit}
+/* 已逛／已買／完成：拿掉圓圈，改成細線勾勾，勾選後變酒紅 */
+.check,.check.on{width:44px;height:44px;border:0;border-radius:0;background:transparent;font-size:0;color:transparent}
+.check::after{content:"";width:20px;height:20px;display:block;margin:auto;background:#D9CDB8;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/contain no-repeat}
+.check.on::after{background:var(--accent);width:24px;height:24px}
+
+/* 數字字型：IM Fell English（18 世紀活版印刷風） */
+.code,.code::before,.code.p3::before,.code.p2::before,.ib-code,.price,.stat .n,.sum b,.pin,.zoomer span{font-family:'IM Fell English','Playfair Display',serif!important;font-weight:400!important;font-style:normal!important}
+.code{font-size:22px}.code::before{font-size:22px!important}
 </style>
 </head>
 <body>
@@ -639,7 +653,7 @@ function renderHome(){
       <div class="ethumb">${e.posterId ? `<img data-img="${e.posterId}" alt="">` : ic('image')}</div>
       <div class="grow">
         <div class="nm">${esc(e.name)}</div>
-        <div class="sub">${dateRange(e)}${e.venue ? `・${esc(e.venue)}` : ''}</div>
+        <div class="sub">${dateRange(e)}</div>${e.venue ? `<div class="sub">${esc(e.venue)}</div>` : ''}
         <div style="margin-top:6px">${status(e)}</div>
       </div>
     </div>`;
