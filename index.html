@@ -374,6 +374,20 @@ h2,h3,.ecard .nm,.sheet .sh-h h2{font-family:'Playfair Display','Noto Serif TC',
 .mk.m,.badge.mail,.badge.mail .i{color:var(--icon-d)}
 .stars{color:var(--icon)}
 .pin.s::before{background:var(--icon)}
+
+/* 購物清單：攤位在上、作品名稱、金額在下 */
+.item .grow{display:flex;flex-direction:column;gap:2px}
+.item.with-booth{flex-wrap:wrap;row-gap:8px}
+.ib{flex:0 0 100%;font-size:14px;color:var(--sub);letter-spacing:.04em;display:flex;align-items:baseline;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ib-code{font-family:'Playfair Display','Cormorant Garamond',serif;font-size:16px;color:var(--ink);font-variant-numeric:lining-nums tabular-nums}
+.ib-pri{font-size:12px;color:var(--accent-ink);margin-left:2px}
+.ib-pri.p2{color:#55634A}.ib-pri.p1{color:var(--sub)}
+.item .price{font-size:18px;color:var(--ink);line-height:1.3}
+
+/* 購物清單依攤位分組 */
+.ib-head{display:flex;align-items:baseline;gap:8px;padding:18px 0 6px;font-size:14px;color:var(--sub);letter-spacing:.04em;border-top:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.ib-head:first-child{border-top:0;padding-top:4px}
+.ib-head+.item{border-top:0;padding-top:4px}
 </style>
 </head>
 <body>
@@ -781,7 +795,7 @@ function tabShop(e){
   let list = allItems(e);
   if (ui.shopFilter === 'todo') list = list.filter(x => !x.i.bought);
   if (ui.shopFilter === 'done') list = list.filter(x => x.i.bought);
-  list.sort((a, b) => (a.i.bought - b.i.bought) || (b.b.priority - a.b.priority) || natural(a.b.code, b.b.code));
+  list.sort((a, b) => (b.b.priority - a.b.priority) || natural(a.b.code, b.b.code)); // 必逛→想逛→有空再逛→未分類，同級依攤位編號
   return `
   <div class="card">
     <div class="sum">
@@ -795,7 +809,7 @@ function tabShop(e){
     <button class="btn sm pri" data-act="newItem">＋ 作品</button>
   </div>
   <div class="card">
-    ${!list.length ? `<div class="empty"><div class="big">${ic('bag')}</div>${t.n ? '這個分類沒有作品' : '還沒有想買的作品'}</div>` : list.map(x => itemRow(x.i, x.b, true)).join('')}
+    ${!list.length ? `<div class="empty"><div class="big">${ic('bag')}</div>${t.n ? '這個分類沒有作品' : '還沒有想買的作品'}</div>` : list.map((x, k) => (k === 0 || list[k - 1].b.id !== x.b.id ? `<div class="ib-head" data-act="openBooth" data-id="${x.b.id}"><span class="ib-code">${esc(x.b.code || '')}</span>${esc(x.b.name || '')}</div>` : '') + itemRow(x.i, x.b, false)).join('')}
   </div>
   <div class="btns"><button class="btn sm" data-act="exportCSV">匯出 CSV</button><button class="btn sm" data-act="importCSV">匯入 CSV</button></div>
   <p class="small-note">CSV 欄位：攤位編號、攤位名稱、優先度(0–3)、作品名稱、金額、數量、已購買、備註、類別、紀念章、情書郵筒。可以先在 Excel 整理攤位清單再匯入（不含圖片）。</p>`;
@@ -803,11 +817,12 @@ function tabShop(e){
 const marks = b => (b.stamp ? `<span class="mk i ${b.stamped ? 'on' : ''}" title="紀念章">${b.stamped ? '✓' : '印'}</span>` : '') + (b.mail ? `<span class="mk m" title="情書郵筒">${ic('mail')}</span>` : '');
 function itemRow(i, b, showBooth){
   return `
-  <div class="item ${i.bought ? 'bought' : ''}">
+  <div class="item ${i.bought ? 'bought' : ''} ${showBooth ? 'with-booth' : ''}">
+    ${showBooth ? `<div class="ib" data-act="editItem" data-id="${i.id}"><span class="ib-code">${esc(b.code || '')}</span>${esc(b.name || '')}</div>` : ''}
     <div class="thumb" data-act="editItem" data-id="${i.id}">${i.imgId ? `<img data-img="${i.imgId}" alt="">` : ic('image')}</div>
     <div class="grow" data-act="editItem" data-id="${i.id}">
       <div class="nm">${esc(i.name || '(未命名作品)')}</div>
-      <div class="sub">${showBooth ? `${esc(b.code || '')} ${esc(b.name || '')}・` : ''}${money(i.price)}${(+i.qty || 1) > 1 ? ` × ${i.qty}` : ''}</div>
+      <div class="price">${money(i.price)}${(+i.qty || 1) > 1 ? `<span class="sub"> × ${i.qty}</span>` : ''}</div>
     </div>
     <button class="check ${i.bought ? 'on' : ''}" data-act="toggleBought" data-id="${i.id}" aria-label="已購買">${i.bought ? '✓' : ''}</button>
   </div>`;
