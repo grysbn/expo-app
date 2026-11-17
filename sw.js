@@ -1,5 +1,5 @@
 /* 展覽小幫手 Service Worker：離線可用。更新程式時把 VERSION 改掉即可 */
-const VERSION = 'expo-v6';
+const VERSION = 'expo-v8';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#FAF6EE">
+<meta name="theme-color" content="#F5EEE1">
 <meta name="robots" content="noindex, nofollow">
 <title>展覽小幫手</title>
 <link rel="manifest" href="manifest.webmanifest">
@@ -15,21 +15,30 @@
 <meta name="apple-mobile-web-app-title" content="展覽小幫手">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600&display=swap" rel="stylesheet">
 <style>
 /* ===== 展覽小幫手・奶油日系風格 =====
    字型：中文標題 Noto Serif TC／內文 Noto Sans TC／英數 Cormorant Garamond
    字級：中文 12・14・16・18・20・26；英數一律 ×1.25（15・18・20・24・32），並固定等高等寬數字
    變數名稱沿用舊版（--red 等），只換色值，避免動到程式邏輯 */
 :root{
-  --bg:#FAF6EE; --card:#FFFDF8; --ink:#3F3128; --sub:#6E5747; --line:#E7DCCB;
-  --oat:#E3D5C0; --cream:#F1E8DA; --brown:#A88B6E;
-  --red:#3F3128; --red-d:#2A2019; --red-soft:#F1E8DA; --red-line:#E3D5C0;
-  --blue:#E2E9EF; --blue-d:#8FA6B8; --blue-ink:#4F6A80; --cblue:#C9D6E0;
-  --yellow:#C9D6E0; --yellow-d:#8FA6B8; --yellow-soft:#E9EEF2;
-  --coral:#A8634F; --coral-soft:#F3E3DA; --green:#4F6A80; --green-soft:#E2E9EF;
+  /* 復古淺黃：舊紙色底、奶油黃按鈕、蜂蜜黃選取、陶土色必逛；全版不用藍色 */
+  --bg:#FBF4DF; --card:#FFFCF1; --ink:#4A3A28; --sub:#76603F; --line:#EEE1BF;
+  --oat:#E7D3A6; --cream:#F6EACB; --brown:#C2A06A; --caramel:#E3A97C; --caramel-d:#A86E44;
+  --red:#4A3A28; --red-d:#2E2418; --red-soft:#F6EACB; --red-line:#E7D3A6;
+  --blue:#F8EDD0; --blue-d:#BF9A45; --blue-ink:#8C6A3A; --cblue:#EBCB7A;
+  --yellow:#F3DE9C; --yellow-d:#D2B35E; --yellow-soft:#FAF0D2;
+  --coral:#B0604A; --coral-soft:#F6E1D6; --green:#8C6A3A; --green-soft:#F8EDD0;
   --serif:'Noto Serif TC','Songti TC',serif;
   --num:'Cormorant Garamond','Noto Serif TC',serif;
+  /* 法式復古：舊紙色、深墨咖啡字、波爾多酒紅主色、鼠尾草綠、舊金線 */
+  --bg:#F5EEE1; --card:#FBF7EF; --ink:#2E2420; --sub:#6B5D52; --line:#E2D6C2; --oat:#DCCDB4; --cream:#EDE3D1; --brown:#9C8A72;
+  --accent:#7A2E3B; --accent-ink:#7A2E3B; --accent-soft:#EED9D6; --on-accent:#F8F1E6; --on-accent-line:rgba(248,241,230,.55);
+  --gold:#B79A63; --sage:#8C9A7D;
+  --coral:#7A2E3B; --coral-soft:#EED9D6;
+  --caramel:var(--accent); --caramel-d:var(--accent-ink); --cblue:var(--accent-soft); --blue:var(--accent-soft);
+  --blue-d:var(--accent); --blue-ink:var(--accent-ink); --yellow:var(--accent-soft); --yellow-d:var(--accent);
+  --green:var(--accent-ink); --green-soft:var(--accent-soft); --red:var(--ink); --red-soft:var(--cream); --red-line:var(--line);
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
@@ -41,11 +50,11 @@ h2{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.06em;
 h3{font-family:var(--serif);font-weight:500;font-size:16px;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:8px;color:var(--ink)}
 .n-num,.code,.pin,.stat .n,.sum b,.price,.stamp,.zoomer span{font-variant-numeric:lining-nums tabular-nums}
 .i{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.28em;flex:none}
-.top{position:sticky;top:0;z-index:20;background:rgba(250,246,238,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+.top{position:sticky;top:0;z-index:20;background:rgba(251,244,223,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   padding:calc(env(safe-area-inset-top) + 12px) 16px 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
 .top .ttl{flex:1;min-width:0;font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:.1em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top .ttl em{display:block;font-family:var(--num);font-style:italic;font-weight:500;font-size:15px;letter-spacing:.06em;color:var(--sub);line-height:1.2}
-.top .logo{font-family:var(--num);width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:20px}
+.top .logo{font-family:var(--num);width:36px;height:36px;border-radius:50%;background:var(--yellow);color:var(--ink);display:grid;place-items:center;font-size:20px}
 .iconbtn{width:42px;height:42px;border-radius:21px;display:grid;place-items:center;font-size:18px;background:var(--card);border:1px solid var(--line);color:var(--ink);flex:none}
 main{padding:20px 16px calc(100px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
 main.home{padding-bottom:calc(116px + env(safe-area-inset-bottom))}
@@ -54,7 +63,7 @@ main.home{padding-bottom:calc(116px + env(safe-area-inset-bottom))}
 .row{display:flex;align-items:center;gap:8px}
 .grow{flex:1;min-width:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:8px 18px;border-radius:999px;background:transparent;border:1px solid var(--oat);font-size:14px;letter-spacing:.08em;white-space:nowrap;color:var(--ink)}
-.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.pri{background:var(--yellow);border-color:var(--yellow-d);color:var(--ink);font-weight:500}
 .btn.yel{background:var(--cblue);border-color:var(--cblue)}
 .btn.danger{color:var(--coral);border-color:var(--coral-soft)}
 .btn.sm{min-height:36px;padding:6px 14px;font-size:14px}
@@ -66,13 +75,15 @@ main.home{padding-bottom:calc(116px + env(safe-area-inset-bottom))}
 .chip{min-height:36px;padding:6px 14px;border-radius:999px;background:transparent;border:1px solid var(--oat);font-size:14px;letter-spacing:.06em;white-space:nowrap;color:var(--ink)}
 .chip.on{background:var(--cblue);border-color:var(--blue-d);color:var(--ink);font-weight:500}
 .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;letter-spacing:.06em;background:var(--cream);color:var(--ink);vertical-align:1px}
-.badge.y{background:var(--blue);color:#3D5468}
-.badge.c{background:var(--ink);color:var(--bg)}
-.badge.b{background:var(--blue);color:#3D5468}
+.badge.y{background:var(--blue);color:#6B5232}
+.badge.c{background:var(--caramel);color:var(--ink)}
+.badge.b{background:var(--blue);color:#6B5232}
 .badge.g{background:var(--oat);color:var(--ink)}
-.mk{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;font-size:12px;vertical-align:-3px;margin-left:3px}
+.badge.mail{background:var(--coral-soft);color:#8A4636}.badge .i{width:15px;height:15px;vertical-align:-3px}
+.chip .i{width:16px;height:16px;vertical-align:-3px}
+.mk{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-size:12px;line-height:1;vertical-align:middle;position:relative;top:-2px;margin-left:4px}
 .mk.i{background:var(--blue-ink);color:#fff}.mk.i.on{background:var(--brown)}
-.mk.m{border:1px solid var(--sub);color:var(--sub);border-radius:4px;width:22px;height:16px;font-size:12px}
+.mk.m{color:var(--coral)}.mk .i{width:18px;height:18px;display:block}
 .empty{text-align:center;padding:36px 16px;color:var(--sub);font-size:14px;line-height:1.8}
 .empty .big{font-size:36px;margin-bottom:8px;color:var(--brown);line-height:1}
 /* home */
@@ -84,9 +95,9 @@ main.home{padding-bottom:calc(116px + env(safe-area-inset-bottom))}
 .ethumb{width:72px;height:96px;border-radius:14px;background:var(--cream);object-fit:cover;flex:none;display:grid;place-items:center;font-size:26px;color:var(--brown);overflow:hidden}
 .ethumb img{width:100%;height:100%;object-fit:cover}
 .ecard .nm{font-family:var(--serif);font-weight:500;font-size:16px;letter-spacing:.06em;margin-bottom:4px}
-.fab{position:fixed;right:18px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:30;min-height:52px;padding:0 24px;border-radius:999px;background:var(--ink);color:var(--bg);box-shadow:0 8px 22px rgba(63,49,40,.22);font-size:16px;letter-spacing:.1em}
+.fab{position:fixed;right:18px;bottom:calc(24px + env(safe-area-inset-bottom));z-index:30;min-height:52px;padding:0 24px;border-radius:999px;background:var(--yellow);border:1px solid var(--yellow-d);color:var(--ink);font-weight:500;box-shadow:0 8px 22px rgba(150,115,40,.18);font-size:16px;letter-spacing:.1em}
 /* tabs */
-.tabs{position:fixed;bottom:0;left:0;right:0;background:rgba(250,246,238,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:20}
+.tabs{position:fixed;bottom:0;left:0;right:0;background:rgba(251,244,223,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:20}
 .tabs button{flex:1;min-height:58px;padding:8px 0 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;letter-spacing:.08em;color:var(--sub)}
 .tabs button .ic{font-size:18px;line-height:1}
 .tabs button.on{color:var(--ink);font-weight:500}
@@ -119,7 +130,7 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .mapbar .btn.sm{padding:6px 14px}
 .mapbar .iconbtn{width:36px;height:36px}
 .mapwrap{position:relative}
-.zoomer{position:absolute;right:10px;bottom:10px;z-index:5;display:flex;flex-direction:row-reverse;align-items:center;background:rgba(255,253,248,.96);border:1px solid var(--line);border-radius:20px;box-shadow:0 2px 10px rgba(63,49,40,.12);overflow:hidden}
+.zoomer{position:absolute;right:10px;bottom:10px;z-index:5;display:flex;flex-direction:row-reverse;align-items:center;background:rgba(255,253,248,.96);border:1px solid var(--line);border-radius:20px;box-shadow:0 2px 10px rgba(74,58,40,.12);overflow:hidden}
 .zoomer button{width:42px;height:38px;font-size:20px;color:var(--ink)}
 .zoomer span{font-family:var(--num);font-weight:500;font-size:15px;color:var(--sub);padding:0 4px;border-left:1px solid var(--line);border-right:1px solid var(--line);line-height:38px;min-width:52px;text-align:center}
 .mapbox{position:relative;overflow:auto;max-height:calc(100dvh - 260px - env(safe-area-inset-top) - env(safe-area-inset-bottom));border-radius:20px;background:var(--card);border:1px solid var(--line);touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
@@ -127,12 +138,12 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .mapinner img{display:block;width:100%;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
 .placing .mapinner{cursor:crosshair}
 .pin{position:absolute;transform:translate(-50%,-50%);min-width:30px;height:26px;padding:0 7px;border-radius:13px;font-size:16px;line-height:23px;text-align:center;font-family:var(--num);font-weight:600;
-  background:var(--card);border:1.5px solid var(--brown);color:var(--ink);box-shadow:0 1px 4px rgba(63,49,40,.22);white-space:nowrap;z-index:2}
+  background:var(--card);border:1.5px solid var(--brown);color:var(--ink);box-shadow:0 1px 4px rgba(74,58,40,.22);white-space:nowrap;z-index:2}
 .pin .pn{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:3px;background:rgba(255,253,248,.96);color:var(--ink);border:1px solid var(--line);border-radius:6px;
-  padding:0 6px;font-size:12px;line-height:18px;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Noto Sans TC','PingFang TC',sans-serif;font-weight:normal;letter-spacing:0;box-shadow:0 1px 3px rgba(63,49,40,.14);pointer-events:none}
-.pin.p3 .pn{border-color:var(--ink)}
+  padding:0 6px;font-size:12px;line-height:18px;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'Noto Sans TC','PingFang TC',sans-serif;font-weight:normal;letter-spacing:0;box-shadow:0 1px 3px rgba(74,58,40,.14);pointer-events:none}
+.pin.p3 .pn{border-color:var(--caramel-d)}
 .pin.p0{background:transparent;border-color:transparent;color:transparent;box-shadow:none;min-width:34px;height:28px}
-.pin.p3{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pin.p3{background:var(--caramel);border-color:var(--caramel-d);color:var(--ink)}
 .pin.p2{background:var(--cblue);border-color:var(--blue-ink);color:var(--ink)}
 .pin.p1{background:var(--card);border-color:var(--brown);color:var(--ink)}
 .pin.p0.v{opacity:1}
@@ -141,7 +152,7 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .pin.v::after{content:"✓";position:absolute;right:-7px;top:-9px;width:17px;height:17px;border-radius:50%;background:var(--brown);color:#fff;font-size:10px;line-height:17px;font-family:'Noto Sans TC',sans-serif}
 .pin.flash{animation:flash 1s ease 3;z-index:3}
 @keyframes flash{50%{transform:translate(-50%,-50%) scale(1.5)}}
-.placebar{background:var(--blue);color:#3D5468;border-radius:16px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:14px}
+.placebar{background:var(--blue);color:#6B5232;border-radius:16px;padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-size:14px}
 .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--sub);margin-top:10px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:-1px}
 /* booths */
@@ -149,10 +160,10 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .code{min-width:54px;height:54px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px;flex:none;position:relative;
   background:var(--card);border:1px solid var(--oat);color:var(--ink);font-family:var(--num);font-weight:600;font-size:22px;line-height:1;letter-spacing:.02em}
 .code::before{content:"No.";font-style:italic;font-weight:500;font-size:12px;letter-spacing:.06em;color:var(--sub);margin-bottom:2px}
-.code.p3{background:var(--ink);border-color:var(--ink);color:var(--bg)}
-.code.p3::before{color:var(--oat)}
+.code.p3{background:var(--caramel);border-color:var(--caramel-d);color:var(--ink)}
+.code.p3::before{color:#6B4E33}
 .code.p2{background:var(--cblue);border-color:var(--blue-d);color:var(--ink)}
-.code.p2::before{color:#3D5468}
+.code.p2::before{color:#6B5232}
 .code.p1{background:var(--card);border-color:var(--brown);color:var(--ink)}
 .top .logo.bear{background:var(--card);border:1px solid var(--line)}
 .top .logo.bear svg{width:30px;height:30px}
@@ -172,15 +183,15 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .sum b{display:block;font-family:var(--num);font-weight:500;font-size:26px;line-height:1.3}
 /* events */
 .ev-ic{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;font-size:20px;flex:none;color:var(--ink)}
-.ev-stamp .ev-ic{background:var(--blue)}.ev-gift .ev-ic{background:var(--cream)}.ev-other .ev-ic{background:#F3EEE6}
+.ev-stamp .ev-ic{background:var(--blue)}.ev-gift .ev-ic{background:var(--cream)}.ev-other .ev-ic{background:var(--yellow-soft)}
 .stamps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .stamp{width:44px;height:44px;border-radius:50%;border:1.5px dashed var(--oat);display:grid;place-items:center;font-size:18px;color:var(--sub);background:var(--card);font-family:var(--num);font-weight:600}
 .stamp.lbl{width:auto;padding:0 14px;border-radius:22px;font-family:'Noto Sans TC',sans-serif;font-weight:normal;font-size:14px}
 .stamp.on{border-style:solid;border-color:var(--blue-ink);background:var(--cblue);color:var(--ink);transform:rotate(-6deg)}
 .evimg{width:100%;border-radius:14px;margin-top:12px;max-height:220px;object-fit:cover}
 /* sheet */
-.sheet-wrap{position:fixed;inset:0;background:rgba(63,49,40,.32);z-index:50;display:flex;align-items:flex-end;justify-content:center;animation:fade .15s}
-.sheet{background:var(--bg);width:100%;max-width:720px;max-height:90dvh;overflow:auto;border-radius:26px 26px 0 0;padding:8px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(63,49,40,.12);animation:up .2s ease}
+.sheet-wrap{position:fixed;inset:0;background:rgba(74,58,40,.18);z-index:50;display:flex;align-items:flex-end;justify-content:center;animation:fade .15s}
+.sheet{background:var(--bg);width:100%;max-width:720px;max-height:90dvh;overflow:auto;border-radius:26px 26px 0 0;padding:8px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(74,58,40,.12);animation:up .2s ease}
 .sheet .grab{width:40px;height:4px;border-radius:4px;background:var(--oat);margin:6px auto 12px}
 .sheet .sh-h{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .sheet .sh-h h2{flex:1;font-size:18px}
@@ -205,8 +216,8 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .tkrow input{padding:10px!important}
 .switch{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:14px}
 .switch input{width:22px;height:22px;accent-color:var(--blue-ink)}
-.dlg-wrap{position:fixed;inset:0;background:rgba(63,49,40,.36);z-index:80;display:grid;place-items:center;padding:24px;animation:fade .15s}
-.dlg{background:var(--card);border-radius:22px;padding:20px;max-width:340px;width:100%;box-shadow:0 12px 34px rgba(63,49,40,.18)}
+.dlg-wrap{position:fixed;inset:0;background:rgba(74,58,40,.22);z-index:80;display:grid;place-items:center;padding:24px;animation:fade .15s}
+.dlg{background:var(--card);border-radius:22px;padding:20px;max-width:340px;width:100%;box-shadow:0 12px 34px rgba(74,58,40,.18)}
 .dlg p{margin:0 0 18px;white-space:pre-line;font-size:16px}
 .dlg .btns{justify-content:flex-end}
 .viewer{position:fixed;inset:0;background:rgba(42,32,25,.92);z-index:90;display:grid;place-items:center;padding:16px;animation:fade .15s}
@@ -219,10 +230,10 @@ textarea.memo{width:100%;min-height:160px;border:1px solid var(--line);border-ra
 .kv .k svg,.ic-inline svg{width:18px;height:18px;stroke:var(--sub);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .ic-inline{line-height:0}
 /* 批次選取 */
-.bcard.sel{outline:1.5px solid var(--ink);outline-offset:-1.5px;background:var(--cream)}
+.bcard.sel{outline:1.5px solid var(--blue-ink);outline-offset:-1.5px;background:var(--cream)}
 .selbox{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--oat);display:grid;place-items:center;flex:none;font-size:14px;background:var(--card);color:#fff}
-.bcard.sel .selbox{background:var(--ink);border-color:var(--ink)}
-.batchbar{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));z-index:25;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 20px -10px rgba(63,49,40,.25);padding:12px 14px}
+.bcard.sel .selbox{background:var(--blue-ink);border-color:var(--blue-ink)}
+.batchbar{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));z-index:25;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 20px -10px rgba(74,58,40,.25);padding:12px 14px}
 .batchbar .row{flex-wrap:wrap;gap:6px}
 main.batch{padding-bottom:calc(210px + env(safe-area-inset-bottom))}
 /* 名單預覽 */
@@ -237,6 +248,132 @@ main.batch{padding-bottom:calc(210px + env(safe-area-inset-bottom))}
   .tabs button{flex:0 0 120px}
   .stats{gap:14px}
 }
+
+/* ===== 減法版面：少框、少色塊、單一強調色 ===== */
+body{background:var(--bg)}
+.top{background:var(--bg);border-bottom:1px solid var(--line)}
+.iconbtn{background:transparent;border:0}
+main{padding-top:12px}
+.card{background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--line);padding:16px 2px;margin:0}
+.card.empty{border-bottom:0}
+.sheet .card{padding:14px 0}
+.bcard{padding:14px 2px;gap:14px}
+.bcard.sel{outline:0;background:var(--accent-soft)}
+.ecard{padding:16px 2px}
+.sec{margin:28px 2px 4px;font-size:14px;letter-spacing:.14em;color:var(--sub)}
+/* 編號：實心＝必逛、淡底＝想逛、細框＝有空再逛、無＝未分類 */
+.code{min-width:52px;height:52px;border:0;background:transparent;color:var(--ink);border-radius:50%}
+.code::before{color:var(--sub)}
+.code.p3{background:var(--accent);color:var(--on-accent)}
+.code.p3::before{color:var(--on-accent);opacity:.85}
+.code.p2{background:#E3E8DA;color:#4F5C42}
+.code.p2::before{color:var(--accent-ink)}
+.code.p1{background:transparent;border:1px solid var(--accent);color:var(--accent-ink)}
+.pin{background:var(--bg);border:1px solid var(--sub);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.pin.p3{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.pin.p3 .pn{border-color:var(--line)}
+.pin.p2{background:#E3E8DA;border-color:#6E7D5F;color:#3F4A35}
+.pin.p1{background:var(--bg);border-color:var(--accent);color:var(--accent-ink)}
+.pin.s::before{background:var(--accent-ink)}
+.pin.v::after{background:var(--sub)}
+/* 標籤改成純文字 */
+.badge,.badge.g,.badge.b,.badge.y,.badge.c,.badge.mail{background:transparent;padding:0;border-radius:0;color:var(--sub);letter-spacing:.06em}
+.badge.y,.badge.c{color:var(--accent-ink);font-weight:500}
+.badge.mail{color:var(--accent-ink)}
+.mk.i{background:transparent;border:1px solid var(--accent-ink);color:var(--accent-ink);font-size:11px}
+.mk.i.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.mk.m{color:var(--accent-ink)}
+.stars{color:var(--accent-ink)}
+/* 篩選：無框文字，選中加底線 */
+.chips{gap:18px;padding:2px 2px 6px;margin-bottom:6px}
+.chip,.mapbar .chip{background:transparent;border:0;border-radius:0;padding:6px 0;min-height:36px;color:var(--sub)}
+.chip.on{background:transparent;border:0;color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--accent)}
+.seg{gap:16px}
+.seg span{background:transparent;border:0;border-radius:0;padding:6px 0;color:var(--sub)}
+.seg input:checked+span{background:transparent;border:0;color:var(--ink);font-weight:600;box-shadow:inset 0 -2px 0 var(--accent)}
+/* 按鈕：只有主要動作是色塊，其餘是文字 */
+.btn{background:transparent;border:0;color:var(--accent-ink);padding:8px 4px;letter-spacing:.06em}
+.btns{gap:4px 18px}
+.btn.pri,.btn.pri.block{background:var(--accent);color:var(--on-accent);padding:8px 20px;border:0}
+.btn.yel{background:var(--accent-soft);color:var(--accent-ink);padding:8px 18px}
+.btn.block{border:1px solid var(--line)}
+.btn.danger{color:var(--coral);border:0}
+.fab{background:var(--accent);color:var(--on-accent);border:0;box-shadow:0 6px 18px rgba(0,0,0,.16)}
+.banner{background:var(--accent-soft);border:0;border-radius:14px}
+.banner>.i{color:var(--accent-ink)}
+.stat{background:transparent;border:0;border-right:1px solid var(--line);border-radius:0}
+.stat:last-child{border-right:0}
+.stat .n{color:var(--ink)}
+.sum div{background:transparent;padding:4px 0}
+.bar{background:var(--line)}
+.bar>i{background:var(--accent)}
+.check{border-color:var(--line);background:transparent}
+.check.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.stamp{border-color:var(--line);background:transparent}
+.stamp.on{border:1.5px solid var(--accent);background:transparent;color:var(--accent-ink)}
+.ev-stamp .ev-ic,.ev-gift .ev-ic,.ev-other .ev-ic{background:transparent;color:var(--accent-ink);width:32px}
+.thumb,.ethumb,.imgpick .pv,.wall img{background:var(--cream)}
+.tabs{background:var(--bg)}
+.tabs button.on{color:var(--accent-ink)}
+.tabs button.on::after{background:var(--accent)}
+.placebar{background:var(--accent-soft);color:var(--ink)}
+.mapbox{border-radius:12px}
+.selbox{border-color:var(--line)}
+.bcard.sel .selbox{background:var(--accent);border-color:var(--accent)}
+.legend i{border:1px solid var(--accent)}
+.f input[type=text],.f input[type=number],.f input[type=date],.f select,.f textarea{background:var(--card);border-color:var(--line);border-radius:10px}
+.top .logo{background:var(--accent);color:var(--on-accent)}
+.mapbar{gap:16px}
+.mapbar .btn.sm{padding:6px 16px}
+
+/* ===== 法式復古：Didone 襯線、酒紅＋鼠尾草綠＋舊金、票券與郵票意象 ===== */
+body{font-family:'Noto Serif TC','Songti TC',serif;background:var(--bg)}
+.top{background:var(--bg);border-bottom:0;box-shadow:inset 0 -4px 0 -3px var(--gold),inset 0 -1px 0 0 var(--gold)}
+.top .ttl{font-family:'Playfair Display','Noto Serif TC',serif;letter-spacing:.06em}
+.top .ttl em{font-family:'Playfair Display',serif;font-style:italic;color:var(--accent-ink);font-size:16px}
+h2,h3,.ecard .nm,.sheet .sh-h h2{font-family:'Playfair Display','Noto Serif TC',serif}
+.sec{justify-content:center;font-family:'Playfair Display','Noto Serif TC',serif;font-style:italic;color:var(--accent-ink);letter-spacing:.16em;font-size:16px}
+.sec::before,.sec::after{content:"";flex:1;border-top:1px solid var(--gold)}
+.card{border-bottom:1px solid var(--line)}
+.code,.price,.stat .n,.sum b{font-family:'Playfair Display','Cormorant Garamond',serif}
+.code{border-radius:2px}
+.code::before{content:"N°";font-family:'Playfair Display',serif}
+.code.p1{border-radius:2px}
+.pin{border-radius:3px;font-family:'Playfair Display',serif}
+.btn.pri,.fab,.btn.pri.block{border-radius:3px;letter-spacing:.14em;box-shadow:inset 0 0 0 1px var(--accent),inset 0 0 0 3px var(--on-accent-line)}
+.fab{font-family:'Playfair Display','Noto Serif TC',serif}
+.banner{border-radius:3px;background:transparent;border:1px solid var(--gold);box-shadow:inset 0 0 0 3px var(--bg),inset 0 0 0 4px var(--gold)}
+.chip,.seg span,.tabs button,.btn{font-family:'Noto Serif TC',serif}
+.chip.on,.seg input:checked+span{box-shadow:inset 0 -1px 0 var(--accent),inset 0 -4px 0 -3px var(--accent)}
+.chip.on{box-shadow:inset 0 -2px 0 var(--accent)}
+.tabs{border-top:1px solid var(--gold)}
+.tabs button.on::after{background:var(--accent);width:14px;height:1.5px;border-radius:0}
+/* 印章＝郵戳、蓋章處＝郵票齒孔 */
+.mk.i{border-radius:50%;border:1px solid var(--accent-ink);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--accent-ink);margin-left:6px}
+.mk.i.on{background:var(--accent)}
+.mk.m{color:var(--accent-ink);margin-left:4px}
+.stamp{border-radius:2px;border:2px dotted var(--gold)}
+.stamp.on{border:2px dotted var(--accent);background:var(--accent-soft);color:var(--accent-ink);transform:rotate(-4deg)}
+.badge.y,.badge.c{font-family:'Playfair Display','Noto Serif TC',serif;font-style:italic}
+.top .logo{border-radius:50%}
+
+/* ===== 圖示統一改復古鼠尾草綠 ===== */
+:root{--icon:#6B7A5C; --icon-d:#55634A; --icon-soft:#E3E8DA}
+.i{color:var(--icon)}
+.btn.pri .i,.fab .i,.btn.pri.block .i{color:var(--on-accent)}
+.iconbtn,.iconbtn .i{color:var(--icon)}
+.tabs button .ic .i{color:var(--icon)}
+.tabs button.on .ic .i{color:var(--icon-d);stroke-width:1.8}
+.kv .k svg,.ic-inline svg{stroke:var(--icon)}
+.banner>.i{color:var(--icon)}
+.empty .big,.empty .big .i{color:var(--icon)}
+.ev-stamp .ev-ic,.ev-gift .ev-ic,.ev-other .ev-ic{color:var(--icon)}
+.thumb,.ethumb,.imgpick .pv,.poster-empty .i{color:var(--icon)}
+.mk.i{border:1.2px solid var(--icon);color:var(--icon-d);box-shadow:none;margin-left:4px}
+.mk.i.on{background:var(--icon);border-color:var(--icon);color:#fff}
+.mk.m,.badge.mail,.badge.mail .i{color:var(--icon-d)}
+.stars{color:var(--icon)}
+.pin.s::before{background:var(--icon)}
 </style>
 </head>
 <body>
@@ -269,6 +406,7 @@ const IC = {
   ticket:'<path d="M4 8a2 2 0 0 0 2-2h12a2 2 0 0 0 2 2v8a2 2 0 0 0-2 2H6a2 2 0 0 0-2-2z"/><path d="M14 6v12" stroke-dasharray="2 2"/>',
   coin:'<circle cx="12" cy="12" r="8"/><path d="M14.5 9.5c-.5-1-1.4-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1.2 0-2.1-.5-2.6-1.5M12 6.5v1.5M12 16v1.5"/>',
   basket:'<path d="M4 10h16l-1.5 9h-13z"/><path d="m8 10 3-5M16 10l-3-5"/>',
+  mail:'<rect x="2" y="4.5" width="20" height="15" rx="2"/><path d="m2.7 5.6 9.3 7 9.3-7"/>',
   info2:'<circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/>'
 };
 const ic = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n] || ''}</svg>`;
@@ -592,7 +730,7 @@ function tabMap(e){
     </div>
   </div>
   </div>
-  <div class="legend"><span><i style="background:var(--ink)"></i>必逛</span><span><i style="background:var(--cblue);border:1px solid var(--blue-ink)"></i>想逛</span><span><i style="background:var(--card);border:1px solid var(--brown)"></i>有空再逛</span><span>點攤位格可開啟・雙指縮放・半透明＝已逛</span></div>`;
+  <div class="legend"><span><i style="background:var(--accent)"></i>必逛</span><span><i style="background:#E3E8DA;border-color:#6E7D5F"></i>想逛</span><span><i style="background:var(--bg)"></i>有空再逛</span></div>`;
 }
 
 /* ---- 攤位 ---- */
@@ -609,7 +747,7 @@ function tabBooth(e){
   list.sort((a, b) => (a.visited - b.visited) || (b.priority - a.priority) || natural(a.code, b.code));
   const chips = [['all','全部'],['p3','必逛'],['p2','想逛'],['p1','有空再逛'],['todo','還沒逛'],['done','已逛']];
   if (e.booths.some(b => b.stamp)) chips.push(['stamp','印 紀念章']);
-  if (e.booths.some(b => b.mail)) chips.push(['mail','✉ 情書郵筒']);
+  if (e.booths.some(b => b.mail)) chips.push(['mail', ic('mail') + ' 情書郵筒']);
   return `
   <div class="row" style="margin-bottom:8px"><div class="grow sub">共 ${e.booths.length} 個攤位・已逛 ${e.booths.filter(b => b.visited).length}</div><button class="btn sm pri" data-act="newBooth">＋ 新增</button></div>
   <div class="btns" style="margin-bottom:10px"><button class="btn sm ${ui.batch ? 'pri' : ''}" data-act="batchToggle">${ui.batch ? '結束批次' : '批次設定'}</button><button class="btn sm" data-act="pasteList">貼上攤位名單</button></div>
@@ -662,7 +800,7 @@ function tabShop(e){
   <div class="btns"><button class="btn sm" data-act="exportCSV">匯出 CSV</button><button class="btn sm" data-act="importCSV">匯入 CSV</button></div>
   <p class="small-note">CSV 欄位：攤位編號、攤位名稱、優先度(0–3)、作品名稱、金額、數量、已購買、備註、類別、紀念章、情書郵筒。可以先在 Excel 整理攤位清單再匯入（不含圖片）。</p>`;
 }
-const marks = b => (b.stamp ? `<span class="mk i ${b.stamped ? 'on' : ''}" title="紀念章">${b.stamped ? '✓' : '印'}</span>` : '') + (b.mail ? '<span class="mk m" title="情書郵筒">✉</span>' : '');
+const marks = b => (b.stamp ? `<span class="mk i ${b.stamped ? 'on' : ''}" title="紀念章">${b.stamped ? '✓' : '印'}</span>` : '') + (b.mail ? `<span class="mk m" title="情書郵筒">${ic('mail')}</span>` : '');
 function itemRow(i, b, showBooth){
   return `
   <div class="item ${i.bought ? 'bought' : ''}">
@@ -853,7 +991,7 @@ function boothForm(e, b, opts = {}){
     <div class="f"><label>優先度</label><div class="seg">${[3,2,1,0].map(p => `<label><input type="radio" name="f_pri" value="${p}" ${+d.priority === p ? 'checked' : ''}><span>${p ? stars(p).replace(/☆/g, '') + ' ' : ''}${PRI[p]}</span></label>`).join('')}</div></div>
     <div class="f"><label>類別</label><input type="text" id="f_bcat" value="${esc(d.cat || '')}" placeholder="例：插畫、文具、活版印刷"></div>
     <label class="switch"><input type="checkbox" id="f_bstamp" ${d.stamp ? 'checked' : ''}> 有原創紀念章（印）</label>
-    <label class="switch"><input type="checkbox" id="f_bmail" ${d.mail ? 'checked' : ''}> 有情書郵筒（✉）</label>
+    <label class="switch"><input type="checkbox" id="f_bmail" ${d.mail ? 'checked' : ''}> 有情書郵筒</label>
     <div class="f" style="margin-top:6px"><label>備註</label><textarea id="f_bnote" placeholder="社群帳號、限定品、幾點開賣…">${esc(d.note || '')}</textarea></div>
     <button class="btn pri block" data-act="saveBooth">${opts.placeAfter ? '儲存並到地圖上標記' : '儲存'}</button>`);
 }
@@ -868,7 +1006,7 @@ function boothSheet(e, id, keep){
       <div class="seg" style="margin-top:10px">${[3,2,1,0].map(p => `<button class="chip ${b.priority === p ? 'on' : ''}" data-act="setPri" data-id="${b.id}" data-v="${p}">${PRI[p]}</button>`).join('')}</div>
       ${b.stamp || b.mail ? `<div class="row" style="margin-top:10px;flex-wrap:wrap">
         ${b.stamp ? `<button class="btn sm ${b.stamped ? 'pri' : ''}" data-act="toggleStamped" data-id="${b.id}">${b.stamped ? '✓ 已蓋紀念章' : '印 蓋紀念章'}</button>` : ''}
-        ${b.mail ? '<span class="badge c">✉ 有情書郵筒</span>' : ''}</div>` : ''}
+        ${b.mail ? `<span class="badge mail">${ic('mail')} 有情書郵筒</span>` : ''}</div>` : ''}
       ${b.note ? `<div style="margin-top:8px;white-space:pre-line">${esc(b.note)}</div>` : ''}
     </div>
     <div class="card">
