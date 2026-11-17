@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#D5DFE6">
+<meta name="theme-color" content="#F8E7CB">
+<meta name="robots" content="noindex, nofollow">
 <title>展覽小幫手</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -14,7 +15,7 @@
 <meta name="apple-mobile-web-app-title" content="展覽小幫手">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:wght@500;600&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=M+PLUS+Rounded+1c:wght@500;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F8E7CB; --card:#FFFCF6; --ink:#4A3A30; --sub:#9A8270; --line:#EBD3AF;
@@ -100,8 +101,12 @@ main.home{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 .wall img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:var(--cream)}
 textarea.memo{width:100%;min-height:110px;border:1px dashed var(--line);border-radius:14px;padding:10px;background:#fffdf8;resize:vertical;font-size:16px}
 /* map */
-.mapbar{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-.mapbar .chip{padding:6px 10px}
+.mapbar{display:flex;align-items:center;gap:5px;margin-bottom:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.mapbar::-webkit-scrollbar{display:none}
+.mapbar>*{flex:none}
+.mapbar .chip{padding:6px 9px}
+.mapbar .btn.sm{padding:6px 10px}
+.mapbar .iconbtn{width:34px;height:32px;font-size:16px}
 .mapwrap{position:relative}
 .zoomer{position:absolute;right:8px;bottom:8px;z-index:5;display:flex;flex-direction:row-reverse;align-items:center;background:rgba(255,252,246,.95);border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 6px rgba(74,58,48,.18);overflow:hidden}
 .zoomer button{width:36px;height:32px;font-size:19px;color:var(--red)}
@@ -130,11 +135,16 @@ textarea.memo{width:100%;min-height:110px;border:1px dashed var(--line);border-r
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:3px;vertical-align:-1px}
 /* booths */
 .bcard{display:flex;gap:10px;align-items:center;cursor:pointer}
-.code{min-width:46px;height:42px;border-radius:6px;display:grid;place-items:center;font-size:17px;padding:0 6px;flex:none;background:var(--blue);color:#fff;font-family:var(--num);font-weight:800;
-  text-shadow:-1px -1px 0 var(--blue-ink),1px -1px 0 var(--blue-ink),-1px 1px 0 var(--blue-ink),1px 1px 0 var(--blue-ink)}
-.code.p3{box-shadow:0 0 0 3px var(--red)}
-.code.p2{box-shadow:0 0 0 3px var(--yellow)}
-.code.p1{box-shadow:0 0 0 2px var(--blue-ink)}
+.code{min-width:48px;height:48px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 6px;flex:none;position:relative;
+  background:#fff;border:1.5px solid var(--line);color:#6B5545;font-family:var(--num);font-weight:800;font-size:18px;line-height:1;letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  box-shadow:0 2px 0 rgba(212,81,61,.08)}
+.code::before{content:"NO.";font-size:8px;font-weight:500;letter-spacing:.12em;color:var(--sub);margin-bottom:3px}
+.code.p3{background:var(--red-soft);border-color:var(--red);color:var(--red-d)}
+.code.p3::before{color:var(--red)}
+.code.p2{background:var(--yellow-soft);border-color:var(--yellow-d);color:#7A5A12}
+.code.p1{background:#F1F6FB;border-color:var(--blue-d);color:#3F648F}
+.top .logo.bear{background:#FFF3E2;box-shadow:0 2px 0 var(--line);border:1.5px solid var(--line)}
+.top .logo.bear svg{width:30px;height:30px}
 .stars{color:var(--yellow-d);letter-spacing:1px;font-size:13px}
 .done-card{opacity:.6}
 /* items */
@@ -192,102 +202,7 @@ textarea.memo{width:100%;min-height:110px;border:1px dashed var(--line);border-r
 .deco{height:0;border-top:3px double var(--red-line);margin:6px 0 10px}
 .small-note{font-size:12px;color:var(--sub);line-height:1.6}
 
-/* ================= 主題：Paper blue（藍灰紙感） ================= */
-:root{
-  --bg:#D5DFE6; --card:#FBFAF6; --ink:#22344B; --sub:#6E7E8E; --line:#C3CFD8;
-  --red:#2C4462; --red-d:#1C2F47; --red-soft:#E4EBF1; --red-line:#A9BAC8;
-  --blue:#FFFFFF; --blue-d:#2C4462; --blue-ink:#2C4462;
-  --yellow:#B79AC0; --yellow-d:#9A7DA6; --yellow-soft:#EEE6F1;
-  --coral:#2C4462; --coral-soft:#E4EBF1; --green:#7F9884; --green-soft:#E3EBE3;
-  --cream:#EEF2F5; --num:'Cormorant Garamond','Noto Serif TC',serif;
-  --serif:'Cormorant Garamond','Noto Serif TC',serif; --script:'La Belle Aurore',cursive;
-}
-body{font-family:'Noto Sans TC','PingFang TC',sans-serif;font-weight:400;letter-spacing:.02em;
-  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
-h2,h3,.top .ttl,.sec,.ecard .nm{font-family:var(--serif);font-weight:600;letter-spacing:.06em}
-h2{color:var(--ink);font-size:22px}
-h3{color:var(--ink);font-size:16px}
-.top{background:rgba(213,223,230,.92);border-bottom:1px solid var(--red-line)}
-.top .ttl{color:var(--ink);font-size:20px}
-.top .ttl small{display:block;font-family:var(--script);font-weight:400;font-size:13px;color:var(--sub);letter-spacing:0;margin-top:-4px}
-.top .logo{background:transparent;color:var(--ink);box-shadow:none;border:1px solid var(--ink);font-family:'Noto Serif TC',serif;font-weight:600;
-  outline:1px solid var(--ink);outline-offset:3px;width:30px;height:30px;font-size:15px;margin:4px}
-.iconbtn{background:var(--card);border-color:var(--line);border-radius:10px}
-.card{background:var(--card);border-radius:4px;border:1px solid #E3E8EC;box-shadow:0 1px 0 #fff inset,0 6px 14px -8px rgba(34,52,75,.35)}
-.btn{border-radius:3px;background:var(--card);border-color:var(--red-line);letter-spacing:.06em}
-.btn.pri{background:var(--red);border-color:var(--red-d);color:#fff;box-shadow:none}
-.btn.danger{color:#8C4A55;border-color:#DCC6CB}
-.chip{border-radius:3px;background:var(--card);border-color:var(--red-line);letter-spacing:.05em}
-.chip.on{background:var(--red);border-color:var(--red);color:#fff}
-.badge{border-radius:2px;background:var(--cream);letter-spacing:.04em}
-.badge.y{background:var(--yellow-soft);color:#6F5579}
-.badge.c{background:var(--red);color:#fff}
-.badge.g{background:var(--green-soft);color:#4F6655}
-.badge.b{background:transparent;border:1px solid var(--red-line);color:var(--sub)}
-.sec{color:var(--ink);font-size:17px}
-.sec::after{border-top:1px solid var(--red-line)}
-.deco{border-top:1px solid var(--red-line);position:relative;margin:10px 0 12px}
-.deco::after{content:"✿";position:absolute;left:50%;top:-10px;transform:translateX(-50%);background:var(--card);padding:0 8px;color:var(--yellow);font-size:13px}
-.banner{background:var(--card);border:1px dashed var(--red-line);border-radius:4px}
-.fab{border-radius:3px;background:var(--red);box-shadow:0 8px 18px -6px rgba(28,47,71,.55);letter-spacing:.08em}
-.tabs{background:var(--card);border-top:1px solid var(--red-line)}
-.tabs button{color:var(--sub);letter-spacing:.06em}
-.tabs button .ic{filter:none;opacity:1;line-height:0;margin-bottom:3px}
-.tabs button .ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.tabs button.on{color:var(--ink)}
-.tabs button.on::after{background:var(--ink);height:1.5px;width:16px}
-.ethumb{border-radius:2px;background:var(--cream);box-shadow:0 0 0 4px #fff,0 0 0 5px #E3E8EC}
-.poster{border-radius:2px;border:0;box-shadow:0 0 0 6px #fff,0 10px 24px -10px rgba(34,52,75,.5);margin:6px 6px 18px;width:calc(100% - 12px)}
-.poster-empty{border-radius:4px;border-color:var(--red-line);background:var(--card)}
-.stat{background:var(--card);border-radius:4px;border-color:#E3E8EC}
-.stat .n{color:var(--ink);font-family:var(--serif);font-size:26px;font-weight:600}
-.tk,.item{border-top:1px solid #E3E8EC}
-.check{border-radius:50%;border:1.5px solid var(--red-line);background:#fff}
-.check.on{background:var(--red);border-color:var(--red)}
-.bar{background:#E7ECF0;height:6px}
-.bar>i{background:var(--red)}
-.bar.over>i{background:#A25B67}
-.sum div{background:var(--cream);border-radius:3px}
-.sum b{font-family:var(--serif);font-weight:600;font-size:22px}
-.code{background:#fff;color:var(--ink);text-shadow:none;border:1.5px solid var(--ink);border-radius:2px;font-family:var(--serif);font-weight:600;font-size:19px;height:44px}
-.code.p3{background:var(--red);color:#fff;box-shadow:none;border-color:var(--red)}
-.code.p2{background:var(--yellow-soft);box-shadow:none;border-color:var(--yellow-d);color:#5E4669}
-.code.p1{box-shadow:none;border-style:dashed}
-.stars{color:var(--yellow-d)}
-.mk.i{background:var(--ink)}.mk.i.on{background:var(--green)}
-.mk.m{border-color:var(--ink);color:var(--ink)}
-.pin{border-radius:2px;font-family:var(--serif);font-weight:600;font-size:13px;border:1.5px solid var(--ink);background:#fff;color:var(--ink)}
-.pin.p3{background:var(--red);border-color:var(--red-d);color:#fff}
-.pin.p2{background:var(--yellow);border-color:var(--yellow-d);color:#fff}
-.pin.p1{background:#fff;border-style:dashed;color:var(--ink)}
-.pin .pn{border-radius:2px;font-family:'Noto Sans TC',sans-serif;border-color:#D8E0E6}
-.pin.p3 .pn{border-color:var(--red);color:var(--ink)}
-.pin.s::before{background:var(--ink)}
-.mapbox{border-radius:4px;border-color:#E3E8EC}
-.zoomer{border-radius:4px}.zoomer button{color:var(--ink)}
-.legend i{border-radius:1px}
-.ev-ic{border-radius:50%;background:var(--cream)!important;border:1px solid var(--red-line)}
-.stamp{border-color:var(--red-line);color:var(--sub);font-family:var(--serif);font-weight:600}
-.stamp.on{border-color:var(--yellow-d);background:var(--yellow);color:#fff}
-.sheet{background:var(--bg);border-top:0;border-radius:6px 6px 0 0;box-shadow:0 -8px 30px rgba(28,47,71,.25)}
-.sheet .grab{background:var(--red-line)}
-.sheet .sh-h h2{font-size:20px}
-.f input[type=text],.f input[type=number],.f input[type=date],.f select,.f textarea{border-radius:3px;border-color:var(--red-line);background:var(--card)}
-.f input:focus,.f textarea:focus,.f select:focus{border-color:var(--ink)}
-.seg span{border-radius:3px;background:var(--card);border-color:var(--red-line)}
-.seg input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
-textarea.memo{border-radius:3px;border-color:var(--red-line);background:#fff}
-.dlg{border-radius:6px}
-#toast{background:var(--ink);border-radius:3px}
-.placebar{background:var(--card);color:var(--ink);border:1px dashed var(--red-line);border-radius:3px}
-.small-note,.sub{color:var(--sub)}
-.empty .big{filter:grayscale(.4)}
-/* 首頁開頭的紙片標題 */
-.hero{position:relative;text-align:center;padding:18px 12px 20px;margin:4px 0 6px}
-.hero .s{font-family:var(--script);font-size:22px;color:#fff;opacity:.9;transform:rotate(-4deg);display:block;text-shadow:0 1px 0 rgba(34,52,75,.15)}
-.hero .t{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--ink);letter-spacing:.08em;margin-top:2px}
-.hero .d{font-size:12px;color:var(--sub);letter-spacing:.25em;margin-top:4px}
-.kv .k{line-height:0;padding-top:2px}
+.kv .k{padding-top:0}
 .kv .k svg,.ic-inline svg{width:18px;height:18px;stroke:var(--sub);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 .ic-inline{line-height:0}
 /* 批次選取 */
@@ -523,7 +438,7 @@ function renderHome(){
   let banner = '';
   if (!lsOK) banner += `<div class="banner">⚠️<div class="grow">這個畫面無法使用本機儲存，關閉後資料會消失。請改用手機瀏覽器開啟。</div></div>`;
   if (S.exhibitions.length && (!lb || (Date.now() - lb) > 30 * 86400000))
-    banner += `<div class="banner"><span class="k ic-inline"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg></span><div class="grow">${lb ? '已經超過 30 天沒備份了' : '還沒有做過備份'}，換手機前記得先備份喔！</div><button class="btn sm pri" data-act="exportBackup">備份</button></div>`;
+    banner += `<div class="banner">💾<div class="grow">${lb ? '已經超過 30 天沒備份了' : '還沒有做過備份'}，換手機前記得先備份喔！</div><button class="btn sm pri" data-act="exportBackup">備份</button></div>`;
   const card = e => `
     <div class="card ecard" data-act="openExpo" data-id="${e.id}">
       <div class="ethumb">${e.posterId ? `<img data-img="${e.posterId}" alt="">` : '🎪'}</div>
@@ -534,9 +449,8 @@ function renderHome(){
       </div>
     </div>`;
   return `
-  <div class="top"><div class="logo">展</div><div class="ttl">展覽小幫手<small>exhibition notes</small></div><button class="iconbtn" data-act="settings" aria-label="備份與設定">⚙︎</button></div>
+  <div class="top"><div class="ttl">展覽小幫手</div><button class="iconbtn" data-act="settings" aria-label="備份與設定">⚙︎</button></div>
   <main class="home">
-    <div class="hero"><span class="s">see you at the fair</span><div class="t">我的展覽</div><div class="d">${S.exhibitions.filter(e => !e.archived).length} UPCOMING · ${S.exhibitions.filter(e => e.archived).length} MEMORIES</div></div>
     ${banner}
     ${!S.exhibitions.length ? `<div class="card empty"><div class="big">🧺</div>還沒有任何展覽<br>按右下角「新增展覽」開始規劃吧！</div>` : ''}
     ${act.length ? `<div class="sec">進行中的展覽</div>${act.map(card).join('')}` : ''}
@@ -546,7 +460,7 @@ function renderHome(){
 }
 
 function renderExpo(e){
-  const tabs = [['info',`<svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`,'資訊'],['map',`<svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>`,'地圖'],['booth',`<svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg>`,'攤位'],['shop',`<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>`,'購物'],['event',`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5" stroke-dasharray="2 2"/></svg>`,'活動']];
+  const tabs = [['info','🎪','資訊'],['map','🗺️','地圖'],['booth','⭐','攤位'],['shop','🛍️','購物'],['event','🎁','活動']];
   const body = {info:tabInfo, map:tabMap, booth:tabBooth, shop:tabShop, event:tabEvent}[ui.tab](e);
   return `
   <div class="top"><button class="iconbtn" data-act="back" aria-label="返回">‹</button><div class="ttl">${esc(e.name)}</div>${e.archived ? '<span class="badge">📔 回憶</span>' : ''}</div>
@@ -567,10 +481,10 @@ function tabInfo(e){
   <div class="card">
     <div class="row" style="align-items:flex-start"><h2 class="grow">${esc(e.name)}</h2>${status(e)}</div>
     <div class="deco" style="margin-top:8px"></div>
-    <div class="kv"><span class="k"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><span>${dateRange(e)}</span></div>
-    ${e.hours ? `<div class="kv"><span class="k"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><span style="white-space:pre-line">${esc(e.hours)}</span></div>` : ''}
-    ${e.venue ? `<div class="kv"><span class="k"><svg viewBox="0 0 24 24"><path d="M12 21s-6-6.1-6-11a6 6 0 0 1 12 0c0 4.9-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span><span>${esc(e.venue)}</span></div>` : ''}
-    ${e.notes ? `<div class="kv"><span class="k"><svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8 12h8M8 16h6"/></svg></span><span style="white-space:pre-line">${esc(e.notes)}</span></div>` : ''}
+    <div class="kv"><span class="k">📅</span><span>${dateRange(e)}</span></div>
+    ${e.hours ? `<div class="kv"><span class="k">🕰️</span><span style="white-space:pre-line">${esc(e.hours)}</span></div>` : ''}
+    ${e.venue ? `<div class="kv"><span class="k">📍</span><span>${esc(e.venue)}</span></div>` : ''}
+    ${e.notes ? `<div class="kv"><span class="k">📝</span><span style="white-space:pre-line">${esc(e.notes)}</span></div>` : ''}
   </div>
   <div class="card">
     <h3>🎟️ 門票</h3>
@@ -618,12 +532,12 @@ function tabMap(e){
       <div class="row" style="width:100%;justify-content:flex-end;margin-top:6px"><button class="btn sm" data-act="seqPrev" ${ui.seq.i ? '' : 'disabled'}>上一個</button><button class="btn sm" data-act="seqSkip">略過</button><button class="btn sm pri" data-act="cancelPlace">結束</button></div></div>`
     : `<div class="placebar"><div class="grow">點地圖上「${esc(placingB.code || placingB.name)}」的位置</div><button class="btn sm" data-act="cancelPlace">取消</button></div>`) : `
   <div class="mapbar">
-    <button class="chip" data-act="rotateMap" aria-label="旋轉地圖">↻ ${r % 180 ? '直式' : '橫式'}</button>
-    <button class="chip ${ui.priOnly ? 'on' : ''}" data-act="togglePriOnly">只看優先</button>
+    <button class="chip" data-act="rotateMap" aria-label="旋轉地圖">↻${r % 180 ? '直' : '橫'}</button>
+    <button class="chip ${ui.priOnly ? 'on' : ''}" data-act="togglePriOnly">優先</button>
     <button class="chip ${S.settings.mapNames !== false ? 'on' : ''}" data-act="toggleNames">名稱</button>
     <span class="grow"></span>
-    <button class="btn sm pri" data-act="markBooth">📌 標攤位</button>
-    <button class="btn sm" data-act="seqStart">依序標記</button>
+    <button class="btn sm pri" data-act="markBooth">📌 標記</button>
+    <button class="btn sm" data-act="seqStart">依序</button>
     <button class="iconbtn" data-act="mapMenu" aria-label="地圖設定">⋯</button>
   </div>`}
   <div class="mapwrap">
